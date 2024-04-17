@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dbstest.employe.EmployeDto;
+import com.example.test.Tesla;
+import com.example.test.Car;
 
 import jakarta.validation.Valid;
 
@@ -20,6 +22,10 @@ public class TestController {
     @CrossOrigin( origins="http://localhost:4200")
     @RequestMapping("/hello")
     public @ResponseBody MessageData hello(){
+        Car t = new Tesla(4);
+        System.out.println(t.getRoda());
+        System.out.println(t.getBahanBakar());
+        // System.out.println(t.test);
         return new MessageData("Hello");
     }   
 
