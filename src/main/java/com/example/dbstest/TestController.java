@@ -1,5 +1,6 @@
 package com.example.dbstest;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -119,4 +120,67 @@ public class TestController {
         System.out.println( data.replaceAll(" ", " and ") );
         return new MessageData(input);
     }    
+
+
+    @RequestMapping("/test5")
+    public @ResponseBody MessageData test5(){
+        String input = "James Bond Test asff ";
+        char[] tmp  = input.toCharArray();
+        int[] arr2 = new int[tmp.length];
+
+        for(int i=0; i < tmp.length; i++ ){
+            if( Character.isLetter(tmp[i]) ){
+                for(int j=0; j < tmp.length; j++ ){
+                    if( tmp[i] == tmp[j] ){
+                        arr2[i] = arr2[i] + 1;
+                    }
+                }
+            } else {
+                arr2[i] = -1;
+            }
+           
+        }
+
+        String result = "";
+        for(int x=0; x < arr2.length; x++ ){
+            if( arr2[x] != -1 ){
+                result = String.valueOf( tmp[x] );
+                break;
+            }
+        }
+        return new MessageData(result);
+    }
+
+    @RequestMapping("/test6")
+    public MessageData test6(){
+        String input = "James Bond Test asff ";
+        int[] test = new int[] {1, 5, 6, 7, 1, 2};
+
+        // int[] test = new int[] {1, 5, 6, 7, 1, 2};
+        int[] arr2 = new int[test.length];
+        int count = test[0];
+        int counter =0;
+
+        for(int i=0; i < test.length; i++ ){
+            arr2[i] = test[ (count + i ) % test.length ];
+        }
+
+        for(int x=0; x < arr2.length; x++ ){
+            System.out.print( arr2[x]+" " );
+        }
+
+        System.err.println();
+        System.out.println( test.length +" ");
+        for(int i=0; i < test.length ; i++ ){
+            System.out.println( i+" ");
+            arr2[i] = test[ ( i+ count + (test.length - 1 ) ) % test.length ];
+            counter += 1;
+        }
+
+        for(int x=0; x < arr2.length; x++ ){
+            System.out.print( arr2[x]+" " );
+        }
+
+        return new MessageData( arr2.toString() );
+    }
 }
